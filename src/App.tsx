@@ -2,13 +2,13 @@ import { useEffect, useState } from "react"
 
 import typesList from "./assets/Types"
 import CardS from "./components/CardS"
+import FilteredList from "./components/FilteredList"
 import Loading from "./components/Loading"
 import Navbar from "./components/Navbar"
 import Sidebar from "./components/Sidebar"
 import TypeFilter from "./components/TypeFilter"
 
 function App() {
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     const [pokemons, setPokemons] = useState({})
     const [displayPokemons, setDisplayPokemons] = useState({})
     const [currentPokemonId, setCurrentPokemonId] = useState(1)
@@ -86,10 +86,17 @@ function App() {
             <Sidebar isDrawerOpen={isDrawerOpen} toggleSidebar={toggleSidebar}>
                 <TypeFilter typesList={selectedTypes} setSelectedTypes={setSelectedTypes} />
             </Sidebar>
-
-            <div className={`grid mt-32 duration-200 ${isDrawerOpen ? "ml-72" : ""}`}>
+            <div className={`mt-32 duration-200 ${isDrawerOpen ? "ml-72" : ""}`}>
+                <div className="flex items-center justify-center h-40">
+                    <FilteredList
+                        filteredPokemons={Object.values(displayPokemons).map((pokemon: any) => ({
+                            id: pokemon.id,
+                            name: pokemon.name,
+                        }))}
+                    />
+                </div>
                 <div
-                    className="grid place-items-center px-10 gap-10 py-12 text-center duration-300"
+                    className="grid place-items-center px-10 gap-10 pb-12 text-center duration-300"
                     style={{ gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))" }}
                 >
                     {Object.values(displayPokemons).length > 0 ? (
