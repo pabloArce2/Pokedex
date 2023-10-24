@@ -8,6 +8,7 @@ import Sidebar from "./components/Sidebar"
 import TypeFilter from "./components/TypeFilter"
 
 function App() {
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     const [pokemons, setPokemons] = useState({})
     const [displayPokemons, setDisplayPokemons] = useState({})
     const [currentPokemonId, setCurrentPokemonId] = useState(1)
@@ -86,8 +87,11 @@ function App() {
                 <TypeFilter typesList={selectedTypes} setSelectedTypes={setSelectedTypes} />
             </Sidebar>
 
-            <div className={`mt-32 duration-200 ${isDrawerOpen ? "ml-72" : ""}`}>
-                <div className="grid-custom gap-10 px-24 py-12 text-center">
+            <div className={`grid mt-32 duration-200 ${isDrawerOpen ? "ml-72" : ""}`}>
+                <div
+                    className="grid place-items-center px-10 gap-10 py-12 text-center duration-300"
+                    style={{ gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))" }}
+                >
                     {Object.values(displayPokemons).length > 0 ? (
                         Object.values(displayPokemons).map((pokemon, index) => (
                             <CardS key={`pokemon ${index}`} pokemon={pokemon} />

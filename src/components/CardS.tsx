@@ -2,7 +2,7 @@ import Type from "./Type.tsx"
 
 export default function CardS({ pokemon }) {
     return (
-        <div className="w-60 bg-white border-2 border-black rounded-lg shadow-md">
+        <div className="w-60 h-68 bg-white border-2 border-black rounded-lg shadow-md">
             <div className="flex flex-col justify-center items-center">
                 <img
                     src={pokemon.sprites.front_default}
